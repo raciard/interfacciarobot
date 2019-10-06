@@ -1,0 +1,44 @@
+.gage{
+    height: 10rem;
+    width: 100%;
+    padding: 5px
+}
+
+.custom-card{
+    border-radius: 0;
+}
+
+
+
+
+
+.position{
+    height: 10rem;
+    max-width: 11rem;
+}
+
+.dist-text{
+    color: #999999;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+
+
+
+
+/* RESPONSIVE ARROWS */
+[class^=arr-]{
+    
+    border:       solid currentColor;
+    border-width: 0 .2em .2em 0;
+    display:      inline-block;
+    padding:      .20em;
+}
+.arr-right {transform:rotate(-45deg);  -webkit-transform:rotate(-45deg);}
+.arr-left  {transform:rotate(135deg);  -webkit-transform:rotate(135deg);}
+.arr-up    {transform:rotate(-135deg); -webkit-transform:rotate(-135deg);}
+.arr-down  {transform:rotate(45deg);   -webkit-transform:rotate(45deg);}
