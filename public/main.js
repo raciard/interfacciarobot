@@ -2,7 +2,7 @@
 JustGage.prototype.destroy = function () {
     document.getElementById(this.config.id).innerHTML = "";     
 }
-const socket = io('localhost:3000')
+const socket = io()
 var gauges = {}    
 var state ={};
 loadGauges();
