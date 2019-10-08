@@ -7,9 +7,9 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
 
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/public'));
 
-http.listen('3000', () => console.log('listening on port 8080'))
+http.listen('3000', () => console.log('listening on port 3000'))
 
 
 
@@ -127,7 +127,7 @@ parser.on('data', (data) => {
             case 0xA1:{
                 i++;
                 
-                status.dist.ahead = data[i];
+                status.dist.up = data[i];
 
             }
             break;

@@ -14,7 +14,8 @@
 
 .position{
     height: 10rem;
-    max-width: 11rem;
+    width: 11rem;
+    
 }
 
 .dist-text{
@@ -42,3 +43,12 @@
 .arr-left  {transform:rotate(135deg);  -webkit-transform:rotate(135deg);}
 .arr-up    {transform:rotate(-135deg); -webkit-transform:rotate(-135deg);}
 .arr-down  {transform:rotate(45deg);   -webkit-transform:rotate(45deg);}
+
+
+@media only screen and (max-width: 600px) {
+    .position{
+        max-height: 10rem;
+        max-width: 11rem;
+        
+    }
+  }

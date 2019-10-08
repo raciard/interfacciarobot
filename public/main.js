@@ -2,7 +2,7 @@
 JustGage.prototype.destroy = function () {
     document.getElementById(this.config.id).innerHTML = "";     
 }
-const socket = io('localhost:3000')
+const socket = io()
 var gauges = {}    
 var state ={};
 loadGauges();
@@ -10,11 +10,21 @@ loadGauges();
 
 
 
-socket.on('status', (status) => {
+socket.on('status', (state) => {
+    this.state = state;
+
+
+
+    this.gauges.temp.refresh(state.temp);
+    this.gauges.humidity.refresh(state.humidity);
+    this.gauges.magnfld.refresh(state.magnfld);
+    this.gauges.temp.refresh(state.temp);
+    this.gauges.light.refresh(state.light);
     
-    this.gauges.temp.refresh(status.temp);
-    state = status;
-    console.log(state)
+    document.getElementById('up-dist').innerText = state.dist.up
+    document.getElementById('left-dist').innerText = state.dist.left
+    document.getElementById('right-dist').innerText = state.dist.right
+
 })
 
 window.onresize = () => {
@@ -26,13 +36,14 @@ window.onresize = () => {
 function destroyGauges(){
     gauges.temp.destroy()
     gauges.humidity.destroy()
-    gauges.magnfl.destroy()
+    gauges.magnfld.destroy()
+    gauges.light.destroy()
 }
 
 function loadGauges(){
     gauges.temp = new JustGage({
         id: "tempGage",
-        value: state.temp || 50,
+        value: state.temp || 0,
         min: 0,
         max: 255,
         title: "Temperatura",
@@ -42,19 +53,30 @@ function loadGauges(){
     
     gauges.humidity = new JustGage({
         id: "humidityGage",
-        value: state.humidity || 50,
+        value: state.humidity || 0,
         min: 0,
         max: 255,
         title: "Umidità"
     });
     
-    gauges.magnfl = new JustGage({
-        id: "magnflGage",
-        value: state.magnfld || 50,
+    gauges.magnfld = new JustGage({
+        id: "magnfldGage",
+        value: state.magnfld || 0,
         min: 0,
         max: 255,
         title: "Campo magnetico"
     });
+
+    gauges.light = new JustGage({
+        id: "lightGage",
+        value: state.light || 0,
+        min: 0,
+        max: 255,
+        title: "Luminosità"
+    });
+
+
+    
 }
 
     
