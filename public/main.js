@@ -4,7 +4,7 @@ JustGage.prototype.destroy = function () {
 }
 const socket = io()
 var gauges = {}    
-var state ={};
+var state = {}; 
 loadGauges();
 
 
@@ -24,6 +24,10 @@ socket.on('status', (state) => {
     document.getElementById('up-dist').innerText = state.dist.up
     document.getElementById('left-dist').innerText = state.dist.left
     document.getElementById('right-dist').innerText = state.dist.right
+
+    if(state.flame == 0xFF){
+        activateLed('led-flame')
+    }
 
 })
 
@@ -80,3 +84,13 @@ function loadGauges(){
 }
 
     
+function activateLed(id){
+    document.getElementById(id).classList.add('led-active')
+}
+
+
+
+
+document.getElementById('sendButton').addEventListener('click', () => {
+    socket.emit('sendinput', document.getElementById('serialOutput').value)
+})

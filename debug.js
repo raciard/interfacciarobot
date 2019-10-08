@@ -12,7 +12,10 @@ const port = new SerialPort('COM4', {
     stopBits: 1 
 });
 
+port.on('data',(data) => {
+    console.log(data[0])
 
+})
 
 setInterval(() => {
     
@@ -20,7 +23,7 @@ setInterval(() => {
 
     
     
-    port.write([0x82, 0xF0]) //fiamma
+    port.write([0x82, 0xFF]) //fiamma
     sleep(500); 
 
     port.write([0x72, 0xF1]) //campo magnetico

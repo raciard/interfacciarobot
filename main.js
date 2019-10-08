@@ -1,5 +1,5 @@
 const SerialPort = require('serialport')
-const ByteLength = require('./lib/myParser')
+const MyParser = require('./lib/myParser')
 const express = require('express')
 
 var app = express();
@@ -23,11 +23,17 @@ const port = new SerialPort('COM5', {
 
 port.on('open', () => {
     port.flush()
+    io.on('connection', (socket) => {
+        socket.on('sendinput', (msg) => {
+            console.log('Sent ' + parseInt(msg) + ' to the serial port')
+            port.write([parseInt(msg)])
+        })  
+    })
 })
 
 
 
-const parser = port.pipe(new ByteLength({length: 2, start: 0xAE}))
+const parser = port.pipe(new MyParser({length: 2, start: 0xAE}))
 
 
 let status = {dist: {}};

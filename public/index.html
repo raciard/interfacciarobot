@@ -10,13 +10,20 @@
 <body>
     <div class="container-fluid ">
         <div class="row a">
-          <div class="col-sm-3 sex">
-            
+          <div class="col-sm-3 p-3 ">
+                <div class="col d-flex flex-column align-items-center justify-content-end">
+                        <label for="serialOutput">Debug input</label>
+        
+                        <div class=" p-2 d-flex">
+                            <input class="form-control mr-2" type="number" id="serialOutput"/>
+                            <button class="btn btn-primary " id="sendButton">Invia</button>
+                        </div>
+                </div>
           </div>
     
-          <div class="col-sm sox">
+          <div class="col-sm sox p-3">
             <div>
-              <div class="card custom-card">
+              <div class="card custom-card ">
                 <div class="card-header">
                   Stato sensori
                 </div>
@@ -49,7 +56,23 @@
 
                     <div class="row">
                         <div id="lightGage" class="gage col"></div>
-                        <div id="" class="gage col"></div>
+                        <div id="" class="gage col d-flex align-items-end justify-content-center">
+                            <div class="led-box ">
+                                <div class="led-red" id="led-flame"></div>
+                                <p>FIAMMA</p>
+                            </div>
+
+                            <div class="led-box ">
+                                <div class="led-red" id="led-gas"></div>
+                                <p>GAS</p>
+                            </div>
+
+                            <div class="led-box ">
+                                <div class="led-red" id="led-water"></div>
+                                <p>ACQUA</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 
@@ -58,12 +81,15 @@
               </div>
             </div>
           </div>
-    
+          
     
         </div>
 
     
-
+        <div class="row">
+            
+        </div>
+    </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
     <script type="text/javascript" src="js/justgage.js"></script>
