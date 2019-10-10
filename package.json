@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "test": "",
+    "pretest": "eslint ."
   },
   "author": "",
   "license": "ISC",
@@ -12,5 +13,8 @@
     "express": "^4.17.1",
     "serialport": "^7.1.5",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1"
   }
 }

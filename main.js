@@ -40,7 +40,7 @@ let status = {dist: {}};
 
 
 parser.on('data', (data) => {
-    for(i = 0; i < data.length; i++){
+    for(let i = 0; i < data.length; i++){
         
         switch(data[i]){
             case 0xAE:{
@@ -89,7 +89,7 @@ parser.on('data', (data) => {
                 status.humidity = data[i];
 
             }
-
+            break;
             // forte vibrazione
             case 0xAA:{
                 i++;
@@ -148,6 +148,7 @@ parser.on('data', (data) => {
 
             }
             break;
+
 
             //distanza sinistra
             case 0xA2:{
