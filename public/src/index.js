@@ -6,9 +6,7 @@ JustGage.prototype.destroy = function () {
     document.getElementById(this.config.id).innerHTML = "";     
 }
 
-if(JustGage){
-    console.log('ou porco dio')
-}
+
 const socket = io()
 var gauges = {}    
 var state = {}; 
