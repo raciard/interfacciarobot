@@ -42,6 +42,9 @@ socket.on('status', (state) => {
         activateLed('led-shock')
     }
 
+
+
+    
     if(state.flame == 0){
         deactivateLed('led-flame')
     }

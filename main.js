@@ -1,5 +1,6 @@
 //made by Riccardo Bracciale
 
+const config = require('./config');
 
 const SerialPort = require('serialport')
 const MyParser = require('./lib/myParser')
@@ -12,12 +13,14 @@ var io = require('socket.io')(http);
 
 app.use(express.static(__dirname + '/public'));
 
-http.listen('3000', () => console.log('listening on port 3000'))
+
+
+http.listen(config.port, () => console.log('listening on port ' + config.port))
 
 
 
 
-const port = new SerialPort('COM6', {
+const serialPort = new SerialPort(config.serialPort, {
     baudRate: 9600, 
     dataBits: 8,
     stopBits: 1 
@@ -25,8 +28,8 @@ const port = new SerialPort('COM6', {
 
 let authenticatedSockets = {}
 
-port.on('open', () => {
-    port.flush()
+serialPort.on('open', () => {
+    serialPort.flush()
     io.on('connection', (socket) => {
         //TODO: fare sistema autenticazione
 
@@ -37,7 +40,7 @@ port.on('open', () => {
         socket.on('sendinput', (msg) => {
             let nmb = parseInt(msg);
             console.log('Sent ' + nmb + ' to the serial port')
-            port.write([nmb])
+            serialPort.write([nmb])
         }) 
 
         socket.on('disconnect', () => {
@@ -52,7 +55,7 @@ port.on('open', () => {
 
 
 
-const parser = port.pipe(new MyParser({length: 2, start: 0xAE}))
+const parser = serialPort.pipe(new MyParser({length: 2, start: 0xAE}))
 
 
 let status = {dist: {}};
