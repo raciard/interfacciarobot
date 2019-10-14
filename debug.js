@@ -6,7 +6,7 @@ function sleep(n) {
 const SerialPort = require('serialport')
 
 
-const port = new SerialPort('COM4', {
+const port = new SerialPort('COM6', {
     baudRate: 9600, 
     dataBits: 8,
     stopBits: 1 

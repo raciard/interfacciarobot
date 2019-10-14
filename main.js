@@ -17,7 +17,7 @@ http.listen('3000', () => console.log('listening on port 3000'))
 
 
 
-const port = new SerialPort('COM5', {
+const port = new SerialPort('COM6', {
     baudRate: 9600, 
     dataBits: 8,
     stopBits: 1 
@@ -59,6 +59,7 @@ let status = {dist: {}};
 
 
 parser.on('data', (data) => {
+    console.log(data);
     for(let i = 0; i < data.length; i++){
         
         switch(data[i]){
@@ -114,7 +115,7 @@ parser.on('data', (data) => {
             case 0xAA:{
                 i++;
                 
-                status.vibration = data[i];
+                status.shock = data[i];
 
             }
             break;

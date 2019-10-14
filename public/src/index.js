@@ -35,6 +35,22 @@ socket.on('status', (state) => {
     if(state.flame == 0xFF){
         activateLed('led-flame')
     }
+    if(state.gas == 0xFF){
+        activateLed('led-gas')
+    }
+    if(state.shock == 0xFF){
+        activateLed('led-shock')
+    }
+
+    if(state.flame == 0){
+        deactivateLed('led-flame')
+    }
+    if(state.gas == 0){
+        deactivateLed('led-gas')
+    }
+    if(state.shock == 0){
+        deactivateLed('led-shock')
+    }
 
 })
 
@@ -92,6 +108,10 @@ function loadGauges(){
     
 function activateLed(id){
     document.getElementById(id).classList.add('led-active')
+}
+
+function deactivateLed(id){
+    document.getElementById(id).classList.remove('led-active')
 }
 
 
