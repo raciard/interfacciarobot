@@ -12,7 +12,9 @@ var gauges = {}
 var state = {}; 
 loadGauges();
 
-
+socket.on('error', (error) => {
+    document.getElementById('error').innerText = "Errore: " + error 
+})
 
 
 socket.on('status', (state) => {
@@ -87,7 +89,6 @@ function loadGauges(){
 
     
 }
-
     
 function activateLed(id){
     document.getElementById(id).classList.add('led-active')

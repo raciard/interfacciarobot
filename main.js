@@ -1,3 +1,6 @@
+//made by Riccardo Bracciale
+
+
 const SerialPort = require('serialport')
 const MyParser = require('./lib/myParser')
 const express = require('express')
@@ -20,15 +23,31 @@ const port = new SerialPort('COM5', {
     stopBits: 1 
 });
 
+let authenticatedSockets = {}
 
 port.on('open', () => {
     port.flush()
     io.on('connection', (socket) => {
+        //TODO: fare sistema autenticazione
+
+        console.log('utente connesso')
+        authenticatedSockets[socket.id] = socket
+
+
         socket.on('sendinput', (msg) => {
-            console.log('Sent ' + parseInt(msg) + ' to the serial port')
-            port.write([parseInt(msg)])
-        })  
+            let nmb = parseInt(msg);
+            console.log('Sent ' + nmb + ' to the serial port')
+            port.write([nmb])
+        }) 
+
+        socket.on('disconnect', () => {
+            console.log('utente disconnesso')
+            delete authenticatedSockets[socket.id]
+        })
     })
+
+
+   
 })
 
 
@@ -44,8 +63,9 @@ parser.on('data', (data) => {
         
         switch(data[i]){
             case 0xAE:{
-                console.log(status)
-                io.sockets.emit('status', status)
+                for(let socketid in authenticatedSockets){
+                    authenticatedSockets[socketid].emit('status', status)
+                }
 
                 status = {dist: {}}
                 
