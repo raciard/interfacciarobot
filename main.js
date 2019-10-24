@@ -1,5 +1,6 @@
 //made by Riccardo Bracciale
 
+
 const config = require('./config');
 
 const SerialPort = require('serialport')
