@@ -12,6 +12,13 @@ var gauges = {}
 var state = {}; 
 loadGauges();
 
+if(localStorage.getItem('jwt') != null){
+    authenticate(localStorage.getItem('jwt'))
+}
+else{
+    document.getElementById('id01').style.display = "block"
+}
+
 socket.on('error', (error) => {
     document.getElementById('error').innerText = "Errore: " + error 
 })
@@ -123,3 +130,52 @@ function deactivateLed(id){
 document.getElementById('sendButton').addEventListener('click', () => {
     socket.emit('sendinput', document.getElementById('serialOutput').value)
 })
+
+
+
+
+function authenticate(jwt){
+    socket.emit('authenticate', {token: jwt})
+    .on('unauthorized', (msg) => {
+        console.log(`unauthorized: ${JSON.stringify(msg.data)}`);
+        throw new Error(msg.data.type);
+      })
+      .on("authenticated", () => {
+        document.getElementById('id01').style.display = 'none'
+        console.log("authenticated")
+      })
+}
+
+
+
+var modal = document.getElementById('id01');
+
+
+
+function login(e){
+    let userField = document.getElementById('username')
+    let pswField = document.getElementById('password')
+    
+    let body = {
+        user: userField.value,
+        password: pswField.value
+    }
+
+    fetch('/auth', {
+        method: 'post',
+        headers: {
+        "Content-type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+    .then((response) => {
+        response.json()
+        .then((res) => {
+            localStorage.setItem('jwt', res.jwt)
+            authenticate(res.jwt)
+        })
+
+    })
+    
+
+}

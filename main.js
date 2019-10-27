@@ -9,11 +9,17 @@ const express = require('express')
 
 var app = express();
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const authRouter = require('./authApi')
 
+var io = require('socket.io')(http);
+const socketioJwt = require('socketio-jwt');
+
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 app.use(express.static(__dirname + '/public'));
-
+app.use('/auth', authRouter)
 
 
 http.listen(config.port, () => console.log('listening on port ' + config.port))
@@ -31,9 +37,16 @@ let authenticatedSockets = {}
 
 serialPort.on('open', () => {
     serialPort.flush()
-    io.on('connection', (socket) => {
-        //TODO: fare sistema autenticazione
+    
+    
 
+    io.on('connection', socketioJwt.authorize({
+        secret: config.secret,
+        timeout: 150000
+    }))
+    .on("authenticated", (socket) => {
+        //TODO: fare sistema autenticazione
+        
         console.log('utente connesso')
         authenticatedSockets[socket.id] = socket
 
@@ -63,7 +76,6 @@ let status = {dist: {}};
 
 
 parser.on('data', (data) => {
-    console.log(data);
     for(let i = 0; i < data.length; i++){
         
         switch(data[i]){
