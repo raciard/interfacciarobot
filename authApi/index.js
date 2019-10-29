@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
         let token = jwt.sign({user: req.body.user}, config.secret)
         res.send({authenticated: true, jwt: token})
     }
-    else res.send({authenticated: false})
+    else res.status('401').send({authenticated: false})
 })
 
 module.exports = router;

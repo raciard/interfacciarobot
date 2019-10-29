@@ -171,10 +171,18 @@ function login(e){
     .then((response) => {
         response.json()
         .then((res) => {
-            localStorage.setItem('jwt', res.jwt)
-            authenticate(res.jwt)
+            if(res.authenticated == true){
+                
+                localStorage.setItem('jwt', res.jwt)
+                authenticate(res.jwt)
+
+                document.getElementById('id01').style.display = 'none'
+            }
         })
 
+    })
+    .catch((err) => {
+        console.error(err)  
     })
     
 
