@@ -151,8 +151,10 @@ function authenticate(jwt){
 var modal = document.getElementById('id01');
 
 
+document.getElementById("login-form").addEventListener('submit', login)
 
 function login(e){
+    e.preventDefault
     let userField = document.getElementById('username')
     let pswField = document.getElementById('password')
     
