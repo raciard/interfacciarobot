@@ -31,7 +31,7 @@ const serialPort = new SerialPort(config.serialPort, {
     baudRate: 9600, 
     dataBits: 8,
     stopBits: 1 
-});
+})
 
 let authenticatedSockets = {}
 
@@ -206,26 +206,6 @@ parser.on('data', (data) => {
             break;
         }
     }
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 });

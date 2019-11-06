@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container-fluid ">
+    <div class="container-fluid " id='cnt'>
         <div class="row a">
           <div class="col-sm-3 p-3 ">
                 <div class="col d-flex flex-column align-items-center justify-content-end">
@@ -103,27 +103,35 @@
 
     <div id="id01" class="modal">
   
-        <div class="modal-content animate">
+        <form class="modal-content animate" id="login-form">
           
       
           <div class="container">
             <label for="uname"><b>Username</b></label>
-            <input type="text" id="username" placeholder="Enter Username" name="uname" required>
+            <input type="text" id="username" placeholder="Inserisci username" name="uname" required>
       
             <label for="psw"><b>Password</b></label>
-            <input type="password" id="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" id="password" placeholder="Inserisci password" name="psw" required>
               
-            <button class="btn btn-primary" onclick="login()">Login</button>
-            
+            <button class="btn btn-primary" type="submit">Login</button>
+            <p class="text-danger mt-2 mb-0" style="float: right" id="auth-error"></p>
           </div>
       
         </form>
     </div>
 
+
+
+
+
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
     <script type="text/javascript" src="src/lib/justgage.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script type="text/javascript" src="src/index.js"></script>
     
+
+
+
 </body>
 </html>
